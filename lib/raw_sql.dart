@@ -9,6 +9,7 @@
 import 'package:f_sql/button.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RawSql extends StatelessWidget {
 
@@ -53,9 +54,12 @@ class RawSql extends StatelessWidget {
               print(list);
             }),
 
-            DButton('查看源码', () async {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (BuildContext context) => RawSql(_database)));
+            DButton('查看本页代码', () async {
+              final url =
+                  "https://github.com/xes1v1/f_sql/blob/main/lib/raw_sql.dart";
+              if (await canLaunch(url)) {
+                await launch(url);
+              }
             }),
           ],
         ),

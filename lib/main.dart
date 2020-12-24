@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(MyApp());
@@ -96,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text('数据库基地址： $_databasesPath'),
-            SizedBox(height: 10),
+            SizedBox(height: 5),
             Text('demo.db 数据库地址： $_dbPath'),
             DButton('创建/获取数据库', () async {
               initDatabase();
@@ -120,10 +121,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   .execute('alter table Test2 rename column num to num3');
               print('更改字段 end');
             }),
-            SizedBox(height: 10),
+            SizedBox(height: 5),
             Text('数据库的操作有两种方式，一种是直接使用sql语句进行操作，即Raw SQL操作, '
                 '另一种是基于SQL helpers的操作，两种方式各有优势，点击下方查看具体使用'),
-            SizedBox(height: 10),
+            SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -132,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) => RawSql(_database)));
                 }),
-                Container(width: 1, height: 50, color: Colors.grey),
+                Container(width: 1, height: 40, color: Colors.grey),
                 DButton('SQL helpers方式', () async {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) => SQLHelpers(_dbPath)));
@@ -155,9 +156,12 @@ class _MyHomePageState extends State<MyHomePage> {
               await deleteDatabase(_dbPath);
             }),
 
-            DButton('查看源码', () async {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (BuildContext context) => RawSql(_database)));
+            DButton('查看本页代码', () async {
+              final url =
+                  "https://github.com/xes1v1/f_sql/blob/main/lib/main.dart";
+              if (await canLaunch(url)) {
+                await launch(url);
+              }
             })
           ],
         ),
