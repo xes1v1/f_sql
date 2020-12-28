@@ -18,7 +18,7 @@ class DButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 2),
+      margin: EdgeInsets.fromLTRB(2, 2, 2, 0),
       child: TextButton(
           onPressed: this.fn,
           style: TextButton.styleFrom(
